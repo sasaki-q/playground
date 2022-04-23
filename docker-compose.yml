@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  service:
+    image: image
+    container_name: container
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    tty: true
+    ports:
+      - 8080:8080
+    restart: always
+    volumes:
+      - type: bind
+        source: .
+        target: /app
