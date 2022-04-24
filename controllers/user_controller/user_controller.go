@@ -8,13 +8,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var (
-	service userservice.UserService
-	users   []usermodel.UserModel
-	err     error
-)
-
 func GetUsers(ctx *gin.Context) {
+	var (
+		service userservice.UserService
+		users   []usermodel.UserModel
+		err     error
+	)
 	users, err = service.GetUsers()
 	if err != nil {
 		ctx.JSON(
