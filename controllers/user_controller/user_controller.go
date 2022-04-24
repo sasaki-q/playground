@@ -8,16 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var (
+	err error
+)
+
 func GetUsers(ctx *gin.Context) {
 	var service userservice.UserService
 	var selectedUser []usermodel.UserModel
-	selectedUser, err := service.GetUsers()
+	selectedUser, err = service.GetUsers()
 	if err != nil {
 		ctx.JSON(
 			http.StatusInternalServerError,
 			gin.H{
 				"result":  "failure",
-				"message": err,
+				"message": err.Error(),
 			})
 	}
 	ctx.JSON(
