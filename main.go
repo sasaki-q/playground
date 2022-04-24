@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"demo/routes"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -9,10 +9,6 @@ import (
 
 func main() {
 	engine := gin.Default()
-	engine.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "hello world",
-		})
-	})
+	routes.Routing(engine)
 	engine.Run(":" + os.Getenv("PORTS"))
 }
