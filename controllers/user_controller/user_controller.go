@@ -8,13 +8,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetSelectedUser(ctx *gin.Context) {
+func GetUsers(ctx *gin.Context) {
 	var service userservice.UserService
-	var selectedUser usermodel.UserModel = *service.GetSelectedUser()
+	var selectedUser []usermodel.UserModel
+	selectedUser, err := service.GetUsers()
+	if err != nil {
+		ctx.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"result":  "failure",
+				"message": err,
+			})
+	}
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{
-			"message": "success",
-			"body":    selectedUser,
+			"result": "success",
+			"body":   selectedUser,
 		})
 }

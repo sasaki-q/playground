@@ -1,16 +1,22 @@
 package userservice
 
 import (
+	"demo/config/db"
 	usermodel "demo/models/user_model"
+	"demo/util"
 )
 
 type UserService struct{}
 
-func (UserService) GetSelectedUser() *usermodel.UserModel {
-	var selectedUser usermodel.UserModel = usermodel.UserModel{
-		Id:   1,
-		Name: "selected user",
-		Age:  20,
+func (UserService) GetUsers() ([]usermodel.UserModel, error) {
+	table := db.GetTable("users")
+	var users []usermodel.UserModel
+	res := table.Where("age >= ?", "20").Scan(&users)
+
+	if res.Error != nil {
+		util.PrintError(res.Error)
+		return nil, res.Error
 	}
-	return &selectedUser
+
+	return users, nil
 }

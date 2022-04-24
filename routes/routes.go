@@ -1,6 +1,7 @@
 package routes
 
 import (
+	simplecontroller "demo/controllers/simple_controller"
 	usercontroller "demo/controllers/user_controller"
 
 	"github.com/gin-gonic/gin"
@@ -9,9 +10,13 @@ import (
 func Routing(router *gin.Engine) {
 	baseGroup := router.Group("/apis")
 	{
-		userGroup := baseGroup.Group("/user")
+		simple := baseGroup.Group("/simple")
 		{
-			userGroup.GET("/", usercontroller.GetSelectedUser)
+			simple.GET("/", simplecontroller.ReturnString)
+		}
+		user := baseGroup.Group("/user")
+		{
+			user.GET("/", usercontroller.GetUsers)
 		}
 	}
 }
