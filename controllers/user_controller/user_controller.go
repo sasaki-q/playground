@@ -9,13 +9,13 @@ import (
 )
 
 var (
-	err error
+	service userservice.UserService
+	users   []usermodel.UserModel
+	err     error
 )
 
 func GetUsers(ctx *gin.Context) {
-	var service userservice.UserService
-	var selectedUser []usermodel.UserModel
-	selectedUser, err = service.GetUsers()
+	users, err = service.GetUsers()
 	if err != nil {
 		ctx.JSON(
 			http.StatusInternalServerError,
@@ -28,6 +28,6 @@ func GetUsers(ctx *gin.Context) {
 		http.StatusOK,
 		gin.H{
 			"result": "success",
-			"body":   selectedUser,
+			"users":  users,
 		})
 }
