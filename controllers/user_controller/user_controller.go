@@ -22,11 +22,33 @@ func GetUsers(ctx *gin.Context) {
 				"result":  "failure",
 				"message": err.Error(),
 			})
+		return
 	}
-	ctx.JSON(
+	ctx.IndentedJSON(
 		http.StatusOK,
-		gin.H{
-			"result": "success",
-			"users":  users,
-		})
+		users,
+	)
+	return
+}
+
+func Create(ctx *gin.Context) {
+	var (
+		body usermodel.CreateModel
+		err  error
+	)
+	err = ctx.ShouldBindJSON(&body)
+	if err != nil {
+		ctx.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"result":  "failure",
+				"message": err.Error(),
+			})
+		return
+	}
+	ctx.IndentedJSON(
+		http.StatusOK,
+		body,
+	)
+	return
 }

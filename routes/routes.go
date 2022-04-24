@@ -17,6 +17,7 @@ func Routing(router *gin.Engine) {
 		user := baseGroup.Group("/user")
 		{
 			user.GET("/", usercontroller.GetUsers)
+			user.POST("/", usercontroller.Create)
 		}
 	}
 }
