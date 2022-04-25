@@ -14,7 +14,7 @@ func GetUsers(ctx *gin.Context) {
 		users   []usermodel.UserModel
 		err     error
 	)
-	users, err = service.GetUsers()
+	err = service.GetUsers(&users)
 	if err != nil {
 		ctx.JSON(
 			http.StatusInternalServerError,
@@ -28,7 +28,6 @@ func GetUsers(ctx *gin.Context) {
 		http.StatusOK,
 		users,
 	)
-	return
 }
 
 func Create(ctx *gin.Context) {
@@ -50,5 +49,4 @@ func Create(ctx *gin.Context) {
 		http.StatusOK,
 		body,
 	)
-	return
 }

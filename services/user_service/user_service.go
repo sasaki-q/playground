@@ -8,15 +8,14 @@ import (
 
 type UserService struct{}
 
-func (UserService) GetUsers() ([]usermodel.UserModel, error) {
+func (UserService) GetUsers(users *[]usermodel.UserModel) error {
 	table := db.GetTable("users")
-	var users []usermodel.UserModel
 	res := table.Where("age >= ?", "20").Scan(&users)
 
 	if res.Error != nil {
 		util.PrintError(res.Error)
-		return nil, res.Error
+		return res.Error
 	}
 
-	return users, nil
+	return nil
 }
