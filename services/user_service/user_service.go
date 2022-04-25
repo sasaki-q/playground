@@ -10,7 +10,7 @@ type UserService struct{}
 
 func (UserService) GetUsers(users *[]usermodel.UserModel) error {
 	table := db.GetTable("users")
-	res := table.Where("age >= ?", "20").Scan(&users)
+	res := table.Where("age >= ?", "20").Scan(users)
 
 	if res.Error != nil {
 		util.PrintError(res.Error)
