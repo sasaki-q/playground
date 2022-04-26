@@ -11,4 +11,5 @@ ENV GIN_MODE=debug
 ENV PORTS=8080
 
 EXPOSE 8080
+
 CMD ["go", "run", "main.go"]
