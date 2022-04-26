@@ -7,7 +7,8 @@ phases:
       - REPOSITORY_URI=${IMAGE_URI}
   build:
     commands:
-      - docker build -t ${IMAGE_URI}:latest .
+      - docker build -t cicd-go .
+      - docker tag cicd-go:latest ${IMAGE_URI}:latest
   post_build:
     commands:
       - docker push ${IMAGE_URI}:latest
