@@ -4,7 +4,8 @@ ENV TZ=Asia/Tokyo
 WORKDIR /app
 
 RUN apk update && apk add git
-COPY go.mod go.sum ./
+COPY ./go.mod ./
+COPY ./go.sum ./
 COPY . .
 
 ENV GIN_MODE=debug

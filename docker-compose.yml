@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  cicd-service-go	:
+  cicd-service-go:
     image: cicd-go
-    container_name: cicd-container-go	
+    container_name: cicd-container-go
     build:
       context: .
       dockerfile: ./dockerfile
