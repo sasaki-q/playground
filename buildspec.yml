@@ -11,6 +11,6 @@ phases:
   post_build:
     commands:
       - docker push ${IMAGE_URI}:latest
-${IMAGE_URI}:latest > imageRepository.json
+      - echo "hoge" > test.txt
 artifacts:
-  files: output.json
+  files: test.txt
