@@ -1,11 +1,11 @@
-FROM golang:1.15.7-alpine
+FROM golang:1.18.0-alpine
 
 ENV TZ=Asia/Tokyo
 WORKDIR /app
 
 RUN apk update && apk add git
 COPY go.mod go.sum ./
-RUN go mod download
+RUN echo start go mod download
 COPY . .
 
 ENV GIN_MODE=debug
