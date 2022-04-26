@@ -5,7 +5,6 @@ WORKDIR /app
 
 RUN apk update && apk add git
 COPY go.mod go.sum ./
-RUN echo start go mod download
 COPY . .
 
 ENV GIN_MODE=debug
