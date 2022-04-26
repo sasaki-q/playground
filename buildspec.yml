@@ -14,6 +14,5 @@ phases:
     commands:
       - echo push image to ECR
       - docker push ${IMAGE_URI}:latest
-${IMAGE_URI}:latest > output.json
 artifacts:
   files: output.json
