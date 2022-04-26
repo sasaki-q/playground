@@ -5,5 +5,5 @@ Resources:
       Properties:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
-          ContainerName: "cicd-container-go"
+          ContainerName: "cicd-container-go	"
           ContainerPort: 8080
