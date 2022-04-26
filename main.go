@@ -1,8 +1,8 @@
 package main
 
 import (
-	"demo/config/db"
 	"demo/routes"
+	"demo/util"
 
 	// "os"
 
@@ -11,8 +11,9 @@ import (
 
 func main() {
 	engine := gin.Default()
-	db.Init()
+	// db.Init()
 	routes.Routing(engine)
 	// engine.Run(":" + os.Getenv("PORTS"))
 	engine.Run(":8080")
+	util.Debug("start runnning")
 }

@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo login ECR & get repository
+      - $(aws ecr get-login --no-include-email --region ${REGION})
+      - REPOSITORY_URI=${IMAGE_URI}
+  build:
+    commands: 
+      - echo build image
+      - docker build -t ${IMAGE_URI}:latest .
+  post_build:
+    commands:
+      - echo push image to ECR
+      - docker push ${IMAGE_URI}:latest
+${IMAGE_URI}:latest > output.json
+artifacts:
+  files: output.json
