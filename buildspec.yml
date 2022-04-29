@@ -3,17 +3,14 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo login ECR & get repository
-      - $(aws ecr get-login --no-include-email --region ${REGION})
-      - REPOSITORY_URI=${IMAGE_URI}
+      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${AWS_ID}.dkr.ecr.${REGION}.amazonaws.com
   build:
-    commands: 
-      - echo build image
-      - docker build -t ${IMAGE_URI}:latest .
+    commands:
+      - docker build -t cicd-go .
+      - docker tag cicd-go:latest ${IMAGE_URI}:latest
   post_build:
     commands:
-      - echo push image to ECR
       - docker push ${IMAGE_URI}:latest
-${IMAGE_URI}:latest > output.json
+      - echo "hoge" > test.txt
 artifacts:
-  files: output.json
+  files: test.txt
